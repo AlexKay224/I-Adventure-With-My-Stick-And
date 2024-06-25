@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2crsurteds7r"]
+
+[ext_resource type="Script" path="res://Remembering/Scripts/EnemyHitboxComponent.cs" id="1_i23yk"]
+
+[node name="EnemyHitboxComponent" type="Area2D" node_paths=PackedStringArray("healthComponent")]
+script = ExtResource("1_i23yk")
+healthComponent = NodePath("")

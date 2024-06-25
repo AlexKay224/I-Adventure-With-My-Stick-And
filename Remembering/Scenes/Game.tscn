@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwer6xnbmjqba"]
+
+[ext_resource type="PackedScene" uid="uid://bo6sp250qfnor" path="res://Remembering/Scenes/Player/Player.tscn" id="1_k123w"]
+[ext_resource type="PackedScene" uid="uid://iw5vkfthjroc" path="res://Remembering/Rooms/Room00001.tscn" id="2_qs8om"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_k123w")]
+Speed = 200.0
+DodgeSpeed = 400.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+
+[node name="Room00001" parent="." instance=ExtResource("2_qs8om")]

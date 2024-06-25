@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://l6qu2x653f71"]
+
+[ext_resource type="PackedScene" uid="uid://d1f116l3w8iii" path="res://Remembering/Scenes/Player/Weapons/blunt_weapon_template.tscn" id="1_i68xs"]
+[ext_resource type="Texture2D" uid="uid://cbegds72avgrk" path="res://Remembering/Art/Weapons/Weapon-Stick.png" id="2_ad6n5"]
+
+[node name="Weapon" instance=ExtResource("1_i68xs")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_ad6n5")

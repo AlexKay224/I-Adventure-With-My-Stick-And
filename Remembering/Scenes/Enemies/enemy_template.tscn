@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqihf1m8j05fk"]
+
+[ext_resource type="PackedScene" uid="uid://bal6dsijgafev" path="res://Remembering/Scenes/Enemies/enemy_health_component.tscn" id="1_2wivj"]
+[ext_resource type="Script" path="res://Remembering/Scripts/Enemy.cs" id="1_kbd3n"]
+[ext_resource type="PackedScene" uid="uid://b2crsurteds7r" path="res://Remembering/Scenes/Enemies/enemy_hitbox_component.tscn" id="2_xvyor"]
+
+[node name="Enemy_Template" type="CharacterBody2D"]
+script = ExtResource("1_kbd3n")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="EnemyHealthComponent" parent="." instance=ExtResource("1_2wivj")]
+
+[node name="EnemyHitboxComponent" parent="." instance=ExtResource("2_xvyor")]
+
+[node name="HitboxShape" type="CollisionShape2D" parent="EnemyHitboxComponent"]

@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://iw5vkfthjroc"]
+
+[ext_resource type="PackedScene" uid="uid://dy2na6sl8y0nb" path="res://Remembering/Rooms/room_template.tscn" id="1_hofua"]
+[ext_resource type="PackedScene" uid="uid://bwoa2pf24e607" path="res://Remembering/Scenes/Level/HorizontalGate.tscn" id="2_capss"]
+[ext_resource type="PackedScene" uid="uid://dq0fbx5fekfnl" path="res://Remembering/Scenes/Enemies/FearCrow.tscn" id="2_wqf53"]
+[ext_resource type="PackedScene" uid="uid://ob728saw48w1" path="res://Remembering/Scenes/Level/VerticalGate.tscn" id="3_vfr24"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtavk"]
+size = Vector2(48.5, 20)
+
+[node name="Room00001" instance=ExtResource("1_hofua")]
+spawnedEnemies = Array[PackedScene]([ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("2_wqf53")])
+
+[node name="EntranceS2" type="Node2D" parent="Entrance" index="0"]
+position = Vector2(16, 240)
+
+[node name="EntranceS1" type="Node2D" parent="Entrance" index="1"]
+position = Vector2(-16, 240)
+
+[node name="EntranceE1" type="Node2D" parent="Entrance" index="2"]
+position = Vector2(240, -16)
+
+[node name="EntranceE2" type="Node2D" parent="Entrance" index="3"]
+position = Vector2(240, 16)
+
+[node name="EntranceN2" type="Node2D" parent="Entrance" index="4"]
+position = Vector2(16, -240)
+
+[node name="EntranceN1" type="Node2D" parent="Entrance" index="5"]
+position = Vector2(-16, -240)
+
+[node name="EntranceW1" type="Node2D" parent="Entrance" index="6"]
+position = Vector2(-240, -16)
+
+[node name="EntranceW2" type="Node2D" parent="Entrance" index="7"]
+position = Vector2(-240, 16)
+
+[node name="Gate" parent="Gates" index="0" instance=ExtResource("2_capss")]
+position = Vector2(0, -256)
+
+[node name="Gate2" parent="Gates" index="1" instance=ExtResource("2_capss")]
+position = Vector2(0, 240)
+
+[node name="Gate3" parent="Gates" index="2" instance=ExtResource("3_vfr24")]
+position = Vector2(240, 0)
+
+[node name="Gate4" parent="Gates" index="3" instance=ExtResource("3_vfr24")]
+position = Vector2(-240, 0)
+
+[node name="Spawn1" type="Node2D" parent="EnemySpawns" index="0"]
+position = Vector2(-128, -128)
+
+[node name="Spawn2" type="Node2D" parent="EnemySpawns" index="1"]
+position = Vector2(96, -96)
+
+[node name="Spawn3" type="Node2D" parent="EnemySpawns" index="2"]
+position = Vector2(-96, 64)
+
+[node name="Spawn4" type="Node2D" parent="EnemySpawns" index="3"]
+position = Vector2(160, 128)
+
+[node name="Spawn5" type="Node2D" parent="EnemySpawns" index="4"]
+position = Vector2(32, 32)
+
+[node name="DetectorS" type="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(0, 240)
+shape = SubResource("RectangleShape2D_mtavk")
+
+[node name="DetectorN" type="CollisionShape2D" parent="PlayerDetector" index="1"]
+position = Vector2(0, -240)
+shape = SubResource("RectangleShape2D_mtavk")
+
+[node name="DetectorE" type="CollisionShape2D" parent="PlayerDetector" index="2"]
+position = Vector2(240, 0)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_mtavk")
+
+[node name="DetectorW" type="CollisionShape2D" parent="PlayerDetector" index="3"]
+position = Vector2(-240, 0)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_mtavk")
+
+[node name="TileMap" parent="." index="4"]
+layer_0/tile_data = PackedInt32Array(-458760, 131072, 0, -524281, 393216, 0, 458759, 0, 1, 524280, 327680, 0, -393224, 262144, 0, -327688, 262144, 0, -262152, 262144, 0, -196616, 262144, 0, -131080, 262144, 0, -65544, 262144, 0, -8, 262144, 0, 65528, 262144, 0, 131064, 262144, 0, 196600, 262144, 0, 262136, 262144, 0, 327672, 262144, 0, 393208, 262144, 0, 458744, 262144, 0, -458759, 196608, 0, -458758, 196608, 0, -458757, 196608, 0, -458756, 196608, 0, -458755, 196608, 0, -458754, 196608, 0, -458753, 196608, 0, -524288, 196608, 0, -524287, 196608, 0, -524286, 196608, 0, -524285, 196608, 0, -524284, 196608, 0, -524283, 196608, 0, -524282, 196608, 0, -458745, 458752, 0, -393209, 458752, 0, -327673, 458752, 0, -262137, 458752, 0, -196601, 458752, 0, -131065, 458752, 0, -65529, 458752, 0, 7, 458752, 0, 65543, 458752, 0, 131079, 458752, 0, 196615, 458752, 0, 262151, 458752, 0, 327687, 458752, 0, 393223, 458752, 0, 524281, 65536, 1, 524282, 65536, 1, 524283, 65536, 1, 524284, 65536, 1, 524285, 65536, 1, 524286, 65536, 1, 524287, 65536, 1, 458752, 65536, 1, 458753, 65536, 1, 458754, 65536, 1, 458755, 65536, 1, 458756, 65536, 1, 458757, 65536, 1, 458758, 65536, 1, -196607, 65536, 0, -262143, 65536, 0, -327679, 65536, 0, -393215, 65536, 0, -458751, 65536, 0, -458752, 65536, 0, -393217, 65536, 0, -393218, 65536, 0, -393219, 65536, 0, -393220, 65536, 0, -393221, 65536, 0, -393222, 65536, 0, -393223, 65536, 0, -327687, 65536, 0, -262151, 65536, 0, -196615, 65536, 0, -131079, 65536, 0, -65543, 65536, 0, -7, 65536, 0, 65529, 65536, 0, 131065, 65536, 0, 196601, 65536, 0, 262137, 65536, 0, 327673, 65536, 0, 393209, 65536, 0, 458745, 65536, 0, 458746, 65536, 0, 393210, 65536, 0, 327674, 65536, 0, 262138, 65536, 0, 196602, 65536, 0, 131066, 65536, 0, 65530, 65536, 0, -6, 65536, 0, -65542, 65536, 0, -131078, 65536, 0, -196614, 65536, 0, -262150, 65536, 0, -327686, 65536, 0, -327685, 65536, 0, -262149, 65536, 0, -196613, 65536, 0, -131077, 65536, 0, -65541, 65536, 0, -5, 65536, 0, 65531, 65536, 0, 131067, 65536, 0, 196603, 65536, 0, 262139, 65536, 0, 327675, 65536, 0, 393211, 65536, 0, 458747, 65536, 0, 458748, 65536, 0, 393212, 65536, 0, 327676, 65536, 0, 262140, 65536, 0, 196604, 65536, 0, 131068, 65536, 0, 65532, 65536, 0, -4, 65536, 0, -65540, 65536, 0, -131076, 65536, 0, -196612, 65536, 0, -262148, 65536, 0, -327684, 65536, 0, -327683, 65536, 0, -262147, 65536, 0, -196611, 65536, 0, -131075, 65536, 0, -65539, 65536, 0, -3, 65536, 0, 65533, 65536, 0, 131069, 65536, 0, 196605, 65536, 0, 262141, 65536, 0, 327677, 65536, 0, 393213, 65536, 0, 458749, 65536, 0, 458750, 65536, 0, 393214, 65536, 0, 327678, 65536, 0, 262142, 65536, 0, 196606, 65536, 0, 131070, 65536, 0, 65534, 65536, 0, -2, 65536, 0, -65538, 65536, 0, -131074, 65536, 0, -196610, 65536, 0, -262146, 65536, 0, -327682, 65536, 0, -327681, 65536, 0, -262145, 65536, 0, -196609, 65536, 0, -131073, 65536, 0, -65537, 65536, 0, -1, 65536, 0, 65535, 65536, 0, 131071, 65536, 0, 196607, 65536, 0, 262143, 65536, 0, 327679, 65536, 0, 393215, 65536, 0, 458751, 65536, 0, 393216, 65536, 0, 327680, 65536, 0, 262144, 65536, 0, 196608, 65536, 0, 131072, 65536, 0, 65536, 65536, 0, 0, 65536, 0, -65536, 65536, 0, -131072, 65536, 0, -196608, 65536, 0, -262144, 65536, 0, -327680, 65536, 0, -393216, 65536, 0, -131071, 65536, 0, -65535, 65536, 0, 1, 65536, 0, 65537, 65536, 0, 131073, 65536, 0, 196609, 65536, 0, 262145, 65536, 0, 327681, 65536, 0, 393217, 65536, 0, 393218, 65536, 0, 327682, 65536, 0, 262146, 65536, 0, 196610, 65536, 0, 131074, 65536, 0, 65538, 65536, 0, 2, 65536, 0, -65534, 65536, 0, -131070, 65536, 0, -196606, 65536, 0, -262142, 65536, 0, -327678, 65536, 0, -393214, 65536, 0, -458750, 65536, 0, -458749, 65536, 0, -393213, 65536, 0, -327677, 65536, 0, -262141, 65536, 0, -196605, 65536, 0, -131069, 65536, 0, -65533, 65536, 0, 3, 65536, 0, 65539, 65536, 0, 131075, 65536, 0, 196611, 65536, 0, 262147, 65536, 0, 327683, 65536, 0, 393219, 65536, 0, 393220, 65536, 0, 327684, 65536, 0, 262148, 65536, 0, 196612, 65536, 0, 131076, 65536, 0, 65540, 65536, 0, 4, 65536, 0, -65532, 65536, 0, -131068, 65536, 0, -196604, 65536, 0, -262140, 65536, 0, -327676, 65536, 0, -393212, 65536, 0, -458748, 65536, 0, -458747, 65536, 0, -393211, 65536, 0, -327675, 65536, 0, -262139, 65536, 0, -196603, 65536, 0, -131067, 65536, 0, -65531, 65536, 0, 5, 65536, 0, 65541, 65536, 0, 131077, 65536, 0, 196613, 65536, 0, 262149, 65536, 0, 327685, 65536, 0, 393221, 65536, 0, 393222, 65536, 0, 327686, 65536, 0, 262150, 65536, 0, 196614, 65536, 0, 131078, 65536, 0, 65542, 65536, 0, 6, 65536, 0, -65530, 65536, 0, -131066, 65536, 0, -196602, 65536, 0, -262138, 65536, 0, -327674, 65536, 0, -393210, 65536, 0, -458746, 65536, 0)

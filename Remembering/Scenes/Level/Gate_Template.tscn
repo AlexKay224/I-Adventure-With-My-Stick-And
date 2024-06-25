@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk6spys4ltufm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ulq7n"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g1qqu"]
+
+[node name="Gate" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_ulq7n")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("CompressedTexture2D_g1qqu")
+hframes = 2
+
+[node name="Collision1" type="CollisionShape2D" parent="."]
+position = Vector2(-31, -1)
+
+[node name="Collision2" type="CollisionShape2D" parent="."]
+position = Vector2(31, -1)
