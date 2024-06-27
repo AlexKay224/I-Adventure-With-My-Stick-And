@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://coumpcaropwy6"]
+
+[ext_resource type="PackedScene" uid="uid://dqihf1m8j05fk" path="res://Remembering/Scenes/Enemies/enemy_template.tscn" id="1_qegnn"]
+
+[node name="Attacking_Enemy_Template" instance=ExtResource("1_qegnn")]

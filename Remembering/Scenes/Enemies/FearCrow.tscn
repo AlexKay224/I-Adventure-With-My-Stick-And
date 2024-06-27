@@ -44,6 +44,7 @@ _data = {
 
 [node name="FearCrow" instance=ExtResource("1_mhoeg")]
 script = ExtResource("2_eem5d")
+Attack = 5.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_m1tsv")

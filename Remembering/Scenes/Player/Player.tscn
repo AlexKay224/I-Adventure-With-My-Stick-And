@@ -1,11 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://bo6sp250qfnor"]
+[gd_scene load_steps=34 format=3 uid="uid://bo6sp250qfnor"]
 
 [ext_resource type="Script" path="res://Remembering/Scripts/Player.cs" id="1_i1r7b"]
 [ext_resource type="Texture2D" uid="uid://bw4lgrnpqwicw" path="res://Remembering/Art/Character/Character.png" id="1_xi7qx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sjgdn"]
-radius = 7.0
-height = 14.0
+height = 22.0
 
 [sub_resource type="Animation" id="Animation_ajlj3"]
 length = 0.001
@@ -364,6 +363,9 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkgyi"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2epv4"]
+radius = 72.0069
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_i1r7b")
 
@@ -372,10 +374,10 @@ texture = ExtResource("1_xi7qx")
 flip_h = true
 hframes = 9
 
-[node name="MeleeTrigger" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 
-[node name="MeleeTriggerHitbox" type="CollisionShape2D" parent="MeleeTrigger"]
-position = Vector2(0, 19)
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_sjgdn")
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="."]
@@ -394,3 +396,15 @@ parameters/idle/blend_position = Vector2(-0.2784, -0.557269)
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_jkgyi")
+
+[node name="AttackableHitbox" type="Area2D" parent="."]
+
+[node name="AttackHitboxShape" type="CollisionShape2D" parent="AttackableHitbox"]
+shape = SubResource("CircleShape2D_2epv4")
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Hitbox" to="." method="OnEnemyAttackedPlayer"]
+[connection signal="body_entered" from="AttackableHitbox" to="." method="OnEnemyDetectsPlayer"]
+[connection signal="body_exited" from="AttackableHitbox" to="." method="OnEnemyLeavePlayer"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="OnTimeout"]

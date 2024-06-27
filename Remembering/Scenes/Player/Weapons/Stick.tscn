@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://l6qu2x653f71"]
+[gd_scene load_steps=4 format=3 uid="uid://l6qu2x653f71"]
 
 [ext_resource type="PackedScene" uid="uid://d1f116l3w8iii" path="res://Remembering/Scenes/Player/Weapons/blunt_weapon_template.tscn" id="1_i68xs"]
 [ext_resource type="Texture2D" uid="uid://cbegds72avgrk" path="res://Remembering/Art/Weapons/Weapon-Stick.png" id="2_ad6n5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n21g5"]
+radius = 12.8062
 
 [node name="Weapon" instance=ExtResource("1_i68xs")]
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_ad6n5")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-13, 0)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_n21g5")
+disabled = false
