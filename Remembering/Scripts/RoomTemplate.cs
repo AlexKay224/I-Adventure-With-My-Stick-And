@@ -54,8 +54,6 @@ public partial class RoomTemplate : Node2D
 			Node2D spawn = (Node2D) spawns[i];
 			PackedScene enemy_scn = spawnedEnemies[i];
 			Enemy enemy = enemy_scn.Instantiate<Enemy>();
-			Debug.WriteLine("Enemy position: " + enemy.GlobalPosition);
-			Debug.WriteLine("Spawn position: " + spawn.GlobalPosition);
 			enemy.TreeExited += OnEnemyDefeated;
 			spawn.AddChild(enemy);
 

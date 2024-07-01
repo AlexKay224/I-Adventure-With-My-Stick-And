@@ -37,15 +37,23 @@ position = Vector2(-240, 16)
 
 [node name="Gate" parent="Gates" index="0" instance=ExtResource("2_capss")]
 position = Vector2(0, -256)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Gate2" parent="Gates" index="1" instance=ExtResource("2_capss")]
 position = Vector2(0, 240)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Gate3" parent="Gates" index="2" instance=ExtResource("3_vfr24")]
 position = Vector2(240, 0)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Gate4" parent="Gates" index="3" instance=ExtResource("3_vfr24")]
 position = Vector2(-240, 0)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Spawn1" type="Node2D" parent="EnemySpawns" index="0"]
 position = Vector2(-128, -128)

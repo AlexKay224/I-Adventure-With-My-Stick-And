@@ -367,7 +367,9 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 radius = 72.0069
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 7
 script = ExtResource("1_i1r7b")
+knockbackPower = 1650.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_xi7qx")
@@ -375,6 +377,7 @@ flip_h = true
 hframes = 9
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 3)
@@ -398,13 +401,18 @@ position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_jkgyi")
 
 [node name="AttackableHitbox" type="Area2D" parent="."]
+collision_mask = 7
 
 [node name="AttackHitboxShape" type="CollisionShape2D" parent="AttackableHitbox"]
 shape = SubResource("CircleShape2D_2epv4")
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
+one_shot = true
 
-[connection signal="body_entered" from="Hitbox" to="." method="OnEnemyAttackedPlayer"]
-[connection signal="body_entered" from="AttackableHitbox" to="." method="OnEnemyDetectsPlayer"]
-[connection signal="body_exited" from="AttackableHitbox" to="." method="OnEnemyLeavePlayer"]
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="OnEnemyOrAttackAttackedPlayer"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="OnTimeout"]
+[connection signal="timeout" from="KnockbackTimer" to="." method="OnKnockbackTimeout"]

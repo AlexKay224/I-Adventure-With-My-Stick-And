@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://bonopjylo6q7u"]
+[gd_scene load_steps=2 format=3 uid="uid://bonopjylo6q7u"]
+
+[ext_resource type="Script" path="res://Remembering/Scripts/EnemyAttackComponent.cs" id="1_t1syx"]
 
 [node name="EnemyAttackComponent" type="Area2D"]
+script = ExtResource("1_t1syx")

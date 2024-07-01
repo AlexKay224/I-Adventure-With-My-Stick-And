@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq0fbx5fekfnl"]
+[gd_scene load_steps=8 format=3 uid="uid://dq0fbx5fekfnl"]
 
 [ext_resource type="PackedScene" uid="uid://dqihf1m8j05fk" path="res://Remembering/Scenes/Enemies/enemy_template.tscn" id="1_mhoeg"]
 [ext_resource type="Script" path="res://Remembering/Scripts/FearCrow.cs" id="2_eem5d"]
@@ -42,9 +42,11 @@ _data = {
 "RESET": SubResource("Animation_nb34w")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o23vu"]
+size = Vector2(16, 8)
+
 [node name="FearCrow" instance=ExtResource("1_mhoeg")]
 script = ExtResource("2_eem5d")
-Attack = 5.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_m1tsv")
@@ -58,3 +60,7 @@ autoplay = "Fly"
 
 [node name="EnemyHealthComponent" parent="." index="4"]
 MAX_HEALTH = 20.0
+
+[node name="HitboxShape" parent="EnemyHitboxComponent" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_o23vu")

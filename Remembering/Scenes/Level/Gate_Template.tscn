@@ -5,6 +5,8 @@
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g1qqu"]
 
 [node name="Gate" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ulq7n")
 
 [node name="Sprite" type="Sprite2D" parent="."]

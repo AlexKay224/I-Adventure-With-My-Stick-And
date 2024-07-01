@@ -37,15 +37,18 @@ public partial class Player : CharacterBody2D
 
 	[Export]
 	public float InvincibilityFrames { get; set; } = 0.5f;
+	[Export]
+	public float knockbackPower { get; set; } = 100f;
 
 	protected Timer InvincibilityTimer;
+	protected Timer KnockbackTimer;
 	private bool isInvincible;
+	private bool knockbackActive;
 
 
 	private bool isAlive;
 
 	//Referenced Attributes
-	Area2D MeleeTrigger;
 	Sprite2D sprite;
 
 	AnimationTree animTree;
@@ -62,7 +65,6 @@ public partial class Player : CharacterBody2D
     public override void _Ready()
     {
         base._Ready();
-		MeleeTrigger = GetNode<Area2D>("MeleeTrigger");
 		sprite = GetNode<Sprite2D>("Sprite");
 		animTree = GetNode<AnimationTree>("PlayerTree");
 		dodgeTimer = DodgeTime;
@@ -71,6 +73,7 @@ public partial class Player : CharacterBody2D
 		meleeState = MeleeState.NO_MELEE;
 
 		InvincibilityTimer = GetNode<Timer>("InvincibilityTimer");
+		KnockbackTimer = GetNode<Timer>("KnockbackTimer");
 		InvincibilityTimer.WaitTime = InvincibilityFrames;
 
 		inputDirection = Vector2.Zero;
@@ -95,8 +98,7 @@ public partial class Player : CharacterBody2D
 		GetInput();
 		if(Velocity != Vector2.Zero)
 		animTree.Set("parameters/Idle/blend_position", Velocity);
-
-		MoveAndSlide();
+		if(!knockbackActive) MoveAndSlide();
 	}
 
     public override void _Process(double delta)
@@ -134,36 +136,21 @@ public partial class Player : CharacterBody2D
 	}
 
 	//used for dealing damage to the player
-	public void OnEnemyOrAttackAttackedPlayer(Node2D body) {
-		if(body.HasMethod("Attack")) {
-			 AttackingEnemy attacker = (AttackingEnemy) body;
-			 if(!isInvincible) {
-			 	TakeDamage(attacker.attack.damage, attacker.attack.attackType);
-				isInvincible = true;
-				InvincibilityTimer.Start();
-			 }
-		} else if(body is Enemy) {
-			if(!isInvincible) {
-				TakeContactDamage(Enemy.CONTACT_DAMAGE);
-			}
+	public void OnEnemyOrAttackAttackedPlayer(Area2D hit) {
+		if(!isInvincible) {
+			if(hit is EnemyAttackComponent) {
+				Debug.WriteLine("Attacking Enemy");
+				EnemyAttackComponent attack = (EnemyAttackComponent) hit;
+					TakeDamage(attack.damage, attack.attackType);
+			} else if(hit is EnemyHitboxComponent) {
+				Debug.WriteLine("Enemy");
+					TakeContactDamage(Enemy.CONTACT_DAMAGE);
+				}
+			Knockback();
+		} else {
+			Debug.WriteLine("honh");
 		}
 	}
-    //used for an enemy detecting the presence of the player, and thus using an attack
-
-    public void OnEnemyDetectsPlayer(Node2D body) {
-		if(body.HasMethod("Attack")) {
-
-			AttackingEnemy attacker = (AttackingEnemy) body;
-			attacker.Attack(GlobalPosition);
-		}
-	}
-
-	//used for an enemy leaving the presence of the player, and thus unable to attack
-	public void OnEnemyLeavePlayer(Node2D body) {
-
-	}
-
-
 
 	public void UpdateAnimation() {
 		if(Velocity == Vector2.Zero) {
@@ -208,13 +195,18 @@ public partial class Player : CharacterBody2D
 		if(Health <= 0f) isAlive = false;
 	}
 
-	public void OnTimeout() {
+	public void OnInvincibleTimeout() {
 		isInvincible = false;
+	}
+
+	public void OnKnockbackTimeout() {
+		knockbackActive = false;
 	}
 
 	
     private void TakeContactDamage(float contactDamage)
     {
+		Debug.WriteLine("OW");
 		if(Shield <= 0f) {
 			Health -= contactDamage;
 		}
@@ -230,5 +222,22 @@ public partial class Player : CharacterBody2D
 
 		if(Health <= 0f) isAlive = false;
     }
+
+	private void Knockback() {
+		if(!knockbackActive) {
+			knockbackActive = true;
+			KnockbackTimer.Start();
+			Vector2 knockback = -Velocity;
+			Velocity = knockback.Normalized() * knockbackPower;
+			MoveAndSlide();
+		}
+	}
+
+	private void Invincible() {
+		if(!isInvincible) {
+			isInvincible = true;
+			InvincibilityTimer.Start();
+		}
+	}
 
 }

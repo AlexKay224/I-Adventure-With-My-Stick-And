@@ -23,4 +23,6 @@ public partial class EnemyHitboxComponent : Area2D
 			healthComponent.TakeDamage(attackPower);
 		}
 	}
+
+	
 }
