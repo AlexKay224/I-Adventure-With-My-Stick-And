@@ -10,7 +10,7 @@ public partial class Player : CharacterBody2D
 	}
 
 	public enum MeleeState {
-		NO_MELEE, MELEE, COOLDOWN
+		NO_MELEE, MELEE
 	}
 
 	Vector2 inputDirection;
@@ -27,6 +27,8 @@ public partial class Player : CharacterBody2D
 	public float DodgeCooldown { get; set; } = 5f;
 	[Export]
 	public float MeleeDamage { get; set; } = 10f;
+	[Export]
+	public float MeleeRate { get; set; } = 1f;
 	[Export]
 	public float MaxHealth { get; set; } = 50f;
 	[Export]
@@ -45,8 +47,10 @@ public partial class Player : CharacterBody2D
 	public ProgressBar healthbar;
 
 
+	//Timers
 	protected Timer InvincibilityTimer;
 	protected Timer KnockbackTimer;
+	protected Timer MeleeTimer;
 	private bool isInvincible;
 	private bool knockbackActive;
 
@@ -64,7 +68,6 @@ public partial class Player : CharacterBody2D
 	//Dodge
 	public float dodgeTimer;
 	public float dodgeCooldownTimer;
-	public Boolean isDodging;
 	public Vector2 dodgeDirection;
 	public DodgeState dodgeState;
 	public float health;
@@ -84,7 +87,9 @@ public partial class Player : CharacterBody2D
 
 		InvincibilityTimer = GetNode<Timer>("InvincibilityTimer");
 		KnockbackTimer = GetNode<Timer>("KnockbackTimer");
+		MeleeTimer = GetNode<Timer>("MeleeTimer");
 		InvincibilityTimer.WaitTime = InvincibilityFrames;
+		MeleeTimer.WaitTime = MeleeRate; //Note that this will have to be adjusted to multiply with weapon cooldown
 
 		inputDirection = Vector2.Zero;
 		animTree.Active = true;
@@ -101,7 +106,7 @@ public partial class Player : CharacterBody2D
 	public void GetInput() {
 		inputDirection = Input.GetVector("Left", "Right", "Up", "Down");
 		CheckDodge(inputDirection);
-		CheckAttack(inputDirection);
+		CheckAttack();
 		if(dodgeState != DodgeState.DODGE) Velocity = inputDirection * Speed;
 	}
 
@@ -140,9 +145,13 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	public void CheckAttack(Vector2 inputDirection) {
-		if(meleeState == MeleeState.NO_MELEE && Input.IsActionJustPressed("Weapon"))
-		return;
+	public bool CheckAttack() {
+		if(meleeState == MeleeState.NO_MELEE && Input.IsActionJustPressed("Weapon")) {
+			Debug.WriteLine("Going to Attack");
+			meleeState = MeleeState.MELEE;
+			MeleeTimer.Start();
+			return true;
+		} else return false;
 
 		//GetNode<AnimatedSprite2D>("Sprite").Play("melee attack");
 	}
@@ -173,9 +182,19 @@ public partial class Player : CharacterBody2D
 			animTree.Set("parameters/conditions/idle", false);
 			animTree.Set("parameters/conditions/isMoving", true);
 		}
-		if(Math.Abs(inputDirection.X) != Math.Abs(inputDirection.Y)) {
+		if(meleeState == MeleeState.NO_MELEE && Input.IsActionJustPressed("Weapon")) {
+			animTree.Set("parameters/conditions/isAttacking", true);
+			Debug.WriteLine("Going to Attack");
+			meleeState = MeleeState.MELEE;
+			MeleeTimer.Start();
+
+		} else {
+			animTree.Set("parameters/conditions/isAttacking", false);
+		}
+		if(inputDirection != Vector2.Zero) {
 			animTree.Set("parameters/Move/blend_position", inputDirection);
 			animTree.Set("parameters/idle/blend_position", inputDirection);
+			animTree.Set("parameters/Melee/blend_position", inputDirection);
 		}
 	}
 
@@ -213,6 +232,10 @@ public partial class Player : CharacterBody2D
 
 	public void OnKnockbackTimeout() {
 		knockbackActive = false;
+	}
+
+	public void OnMeleeTimeout() {
+		meleeState = MeleeState.NO_MELEE;
 	}
 
 	

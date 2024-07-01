@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bo6sp250qfnor"]
+[gd_scene load_steps=51 format=3 uid="uid://bo6sp250qfnor"]
 
 [ext_resource type="Script" path="res://Remembering/Scripts/Player.cs" id="1_i1r7b"]
 [ext_resource type="Texture2D" uid="uid://bw4lgrnpqwicw" path="res://Remembering/Art/Character/Character.png" id="1_xi7qx"]
@@ -261,6 +261,94 @@ tracks/1/keys = {
 "values": [false, false, false, false, false]
 }
 
+[sub_resource type="Animation" id="Animation_got24"]
+resource_name = "melee_front"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_oj4ar"]
+resource_name = "melee_back"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_usqht"]
+resource_name = "melee_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+
+[sub_resource type="Animation" id="Animation_t2v1p"]
+resource_name = "melee_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kgiei"]
 _data = {
 "RESET": SubResource("Animation_ajlj3"),
@@ -268,11 +356,58 @@ _data = {
 "idle_left": SubResource("Animation_5xyu3"),
 "idle_right": SubResource("Animation_ox4cr"),
 "idle_up": SubResource("Animation_3tn4x"),
+"melee_back": SubResource("Animation_oj4ar"),
+"melee_front": SubResource("Animation_got24"),
+"melee_left": SubResource("Animation_usqht"),
+"melee_right": SubResource("Animation_t2v1p"),
 "move_down": SubResource("Animation_ixa48"),
 "move_left": SubResource("Animation_6c0mb"),
 "move_right": SubResource("Animation_mwcml"),
 "move_up": SubResource("Animation_fuu1m")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5yi2p"]
+animation = &"melee_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fv0l6"]
+animation = &"melee_back"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_535m0"]
+animation = &"melee_front"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5iqis"]
+animation = &"melee_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_soema"]
+animation = &"melee_back"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2idxb"]
+animation = &"melee_back"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mjuq3"]
+animation = &"melee_front"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e1j76"]
+animation = &"melee_front"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_e25y7"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5yi2p")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_fv0l6")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_535m0")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_5iqis")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_soema")
+blend_point_4/pos = Vector2(-1, 1)
+blend_point_5/node = SubResource("AnimationNodeAnimation_2idxb")
+blend_point_5/pos = Vector2(1, 1)
+blend_point_6/node = SubResource("AnimationNodeAnimation_mjuq3")
+blend_point_6/pos = Vector2(1, -1)
+blend_point_7/node = SubResource("AnimationNodeAnimation_e1j76")
+blend_point_7/pos = Vector2(-1, -1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w03ch"]
 animation = &"move_left"
@@ -353,13 +488,33 @@ advance_condition = &"isMoving"
 advance_mode = 2
 advance_condition = &"idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g2ulf"]
+advance_mode = 2
+advance_condition = &"isAttacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g5riw"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f1wlk"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"isMoving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jmj0t"]
+advance_mode = 2
+advance_condition = &"isAttacking"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vpl2p"]
+states/Melee_Attack/node = SubResource("AnimationNodeBlendSpace2D_e25y7")
+states/Melee_Attack/position = Vector2(448, 287)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_vvlbf")
 states/Move/position = Vector2(544, 116)
 states/Start/position = Vector2(227, 116)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_y5vgt")
-states/idle/position = Vector2(363, 116)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_vsu07"), "idle", "Move", SubResource("AnimationNodeStateMachineTransition_vlxat"), "Move", "idle", SubResource("AnimationNodeStateMachineTransition_llulg")]
+states/idle/position = Vector2(354, 116)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_vsu07"), "idle", "Move", SubResource("AnimationNodeStateMachineTransition_vlxat"), "Move", "idle", SubResource("AnimationNodeStateMachineTransition_llulg"), "idle", "Melee_Attack", SubResource("AnimationNodeStateMachineTransition_g2ulf"), "Melee_Attack", "idle", SubResource("AnimationNodeStateMachineTransition_g5riw"), "Melee_Attack", "Move", SubResource("AnimationNodeStateMachineTransition_f1wlk"), "Move", "Melee_Attack", SubResource("AnimationNodeStateMachineTransition_jmj0t")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkgyi"]
 
@@ -369,6 +524,7 @@ radius = 72.0069
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 7
 script = ExtResource("1_i1r7b")
+MeleeRate = 0.5
 knockbackPower = 1650.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -392,9 +548,11 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_vpl2p")
 anim_player = NodePath("../PlayerAnimations")
 parameters/conditions/idle = false
+parameters/conditions/isAttacking = false
 parameters/conditions/isMoving = false
-parameters/Move/blend_position = Vector2(0.9408, 0.906167)
-parameters/idle/blend_position = Vector2(-0.2784, -0.557269)
+parameters/Melee_Attack/blend_position = Vector2(0.844741, 0.641148)
+parameters/Move/blend_position = Vector2(0.0434057, -0.641148)
+parameters/idle/blend_position = Vector2(0.253756, 0.378947)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -413,6 +571,9 @@ one_shot = true
 wait_time = 0.25
 one_shot = true
 
+[node name="MeleeTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hitbox" to="." method="OnEnemyOrAttackAttackedPlayer"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="OnTimeout"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="OnKnockbackTimeout"]
+[connection signal="timeout" from="MeleeTimer" to="." method="OnMeleeTimeout"]
