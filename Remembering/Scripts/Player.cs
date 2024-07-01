@@ -16,6 +16,7 @@ public partial class Player : CharacterBody2D
 	Vector2 inputDirection;
 
 	//Exported Attributes
+	[ExportGroup("Attributes")]
 	[Export]
 	public float Speed { get; set; } = 300f;
 	[Export]
@@ -27,18 +28,22 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public float MeleeDamage { get; set; } = 10f;
 	[Export]
-	public float Health { get; set; } = 50f;
+	public float MaxHealth { get; set; } = 50f;
 	[Export]
 	public float Shield { get; set; } = 0f;
 	[Export]
 	public float Defence { get; set; } = 0f;
 	[Export]
 	public float Resistance { get; set; } = 0f;
-
 	[Export]
 	public float InvincibilityFrames { get; set; } = 0.5f;
 	[Export]
 	public float knockbackPower { get; set; } = 100f;
+
+	[ExportGroup("Instances")]
+	[Export]
+	public ProgressBar healthbar;
+
 
 	protected Timer InvincibilityTimer;
 	protected Timer KnockbackTimer;
@@ -47,6 +52,10 @@ public partial class Player : CharacterBody2D
 
 
 	private bool isAlive;
+
+	//Custom Signals
+	[Signal]
+	public delegate void HealthChangeEventHandler();
 
 	//Referenced Attributes
 	Sprite2D sprite;
@@ -58,6 +67,7 @@ public partial class Player : CharacterBody2D
 	public Boolean isDodging;
 	public Vector2 dodgeDirection;
 	public DodgeState dodgeState;
+	public float health;
 
 	//Melee Attack
 	public MeleeState meleeState;
@@ -80,6 +90,8 @@ public partial class Player : CharacterBody2D
 		animTree.Active = true;
 		isAlive = true;
 		isInvincible = false;
+
+		health = MaxHealth;
     }
 
 
@@ -180,19 +192,19 @@ public partial class Player : CharacterBody2D
 		}
 		if(damageDealt <= 1) damageDealt = 1f;
 		if(Shield <= 0f) {
-			Health -= damageDealt;
+			health -= damageDealt;
 		}
 		else if(Shield < damageDealt) {
 			float temp = Shield;
 			Shield = 0f;
 			damageDealt -= temp;
-			Health -= damageDealt;
+			health -= damageDealt;
 		}
 		else {
 			Shield -= damageDealt;
 		}
 
-		if(Health <= 0f) isAlive = false;
+		if(health <= 0f) isAlive = false;
 	}
 
 	public void OnInvincibleTimeout() {
@@ -208,19 +220,20 @@ public partial class Player : CharacterBody2D
     {
 		Debug.WriteLine("OW");
 		if(Shield <= 0f) {
-			Health -= contactDamage;
+			health -= contactDamage;
 		}
 		else if(Shield < contactDamage) {
 			float temp = Shield;
 			Shield = 0f;
 			contactDamage -= temp;
-			Health -= contactDamage;
+			health -= contactDamage;
 		}
 		else {
 			Shield -= contactDamage;
 		}
+		EmitSignal(SignalName.HealthChange);
 
-		if(Health <= 0f) isAlive = false;
+		if(health <= 0f) GameOver();
     }
 
 	private void Knockback() {
@@ -238,6 +251,13 @@ public partial class Player : CharacterBody2D
 			isInvincible = true;
 			InvincibilityTimer.Start();
 		}
+	}
+
+	public void GameOver() {
+		//this is not finished. It is a very scuffed way to end the game
+		isAlive = false;
+		Visible = false;
+		knockbackActive = true;
 	}
 
 }

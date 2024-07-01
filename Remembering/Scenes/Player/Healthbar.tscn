@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://deljfjjovljl3"]
+
+[ext_resource type="Texture2D" uid="uid://d36pee500iufu" path="res://Remembering/Art/Character/Health.png" id="1_41fkq"]
+[ext_resource type="Script" path="res://Remembering/Scripts/PlayerUI.cs" id="1_vitqk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mee00"]
+bg_color = Color(0.0156863, 0.113725, 0.192157, 0.823529)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 0.47451)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ejek"]
+bg_color = Color(0.25098, 0.0823529, 0.0862745, 0.501961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.913725, 0.913725, 0.913725, 0.458824)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ju2l6"]
+bg_color = Color(0.862745, 0.52549, 0.52549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="PlayerInfo" type="Panel"]
+offset_right = 196.0
+offset_bottom = 98.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mee00")
+script = ExtResource("1_vitqk")
+
+[node name="Health Icon" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 27.0
+offset_right = 21.0
+offset_bottom = 43.0
+texture = ExtResource("1_41fkq")
+stretch_mode = 4
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -25.0
+offset_right = 184.0
+offset_bottom = -1.0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_styles/background = SubResource("StyleBoxFlat_6ejek")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ju2l6")
+value = 100.0
+show_percentage = false
+
+[node name="HealthCount" type="RichTextLabel" parent="HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]Hello World[/center]"
+fit_content = true
