@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dq0fbx5fekfnl"]
 
 [ext_resource type="PackedScene" uid="uid://dqihf1m8j05fk" path="res://Remembering/Scenes/Enemies/enemy_template.tscn" id="1_mhoeg"]
-[ext_resource type="Script" path="res://Remembering/Scripts/FearCrow.cs" id="2_eem5d"]
 [ext_resource type="Texture2D" uid="uid://d06bjig62hs13" path="res://Remembering/Art/Enemies/Fear Crow.png" id="2_m1tsv"]
+[ext_resource type="Script" path="res://Remembering/Scripts/Enemy/FearCrow.cs" id="2_wqsuf"]
 
 [sub_resource type="Animation" id="Animation_kqesg"]
 resource_name = "Fly"
@@ -46,7 +46,7 @@ _data = {
 size = Vector2(16, 8)
 
 [node name="FearCrow" instance=ExtResource("1_mhoeg")]
-script = ExtResource("2_eem5d")
+script = ExtResource("2_wqsuf")
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_m1tsv")

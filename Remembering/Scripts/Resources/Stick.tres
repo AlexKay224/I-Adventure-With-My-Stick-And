@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://yxxe6c1h38rs"]
+
+[ext_resource type="Texture2D" uid="uid://cbegds72avgrk" path="res://Remembering/Art/Weapons/Weapon-Stick.png" id="1_7vm2k"]
+[ext_resource type="Script" path="res://Remembering/Scripts/Resources/Weapon.cs" id="2_qmdc5"]
+
+[resource]
+script = ExtResource("2_qmdc5")
+name = "Stick"
+texture = ExtResource("1_7vm2k")
+icon = ExtResource("1_7vm2k")
+damage = 5.0
+firerate = 5.0
+playerState = "Melee"
+weaponAnimation = "BluntAttack/BA"
+projectiles = PackedInt32Array()
+properties = PackedInt32Array()

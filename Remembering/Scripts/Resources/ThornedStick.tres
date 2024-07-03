@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://d01yonk1p5k3g"]
+
+[ext_resource type="Texture2D" uid="uid://3kb4nyhjnwpn" path="res://Remembering/Art/Weapons/Weapon-ThornedStick.png" id="1_1pm8y"]
+[ext_resource type="Script" path="res://Remembering/Scripts/Resources/Weapon.cs" id="2_ahpvo"]
+
+[resource]
+script = ExtResource("2_ahpvo")
+name = "Thorned Stick"
+texture = ExtResource("1_1pm8y")
+icon = ExtResource("1_1pm8y")
+damage = 10.0
+firerate = 10.0
+playerState = "Melee"
+weaponAnimation = "BluntAttack/BA"
+projectiles = PackedInt32Array()
+properties = PackedInt32Array()

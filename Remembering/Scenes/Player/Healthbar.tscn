@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://deljfjjovljl3"]
 
 [ext_resource type="Texture2D" uid="uid://d36pee500iufu" path="res://Remembering/Art/Character/Health.png" id="1_41fkq"]
-[ext_resource type="Script" path="res://Remembering/Scripts/PlayerUI.cs" id="1_vitqk"]
+[ext_resource type="Script" path="res://Remembering/Scripts/Player/PlayerUI.cs" id="1_c0yst"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mee00"]
 bg_color = Color(0.0156863, 0.113725, 0.192157, 0.823529)
@@ -45,7 +45,7 @@ corner_radius_bottom_left = 12
 offset_right = 196.0
 offset_bottom = 98.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_mee00")
-script = ExtResource("1_vitqk")
+script = ExtResource("1_c0yst")
 
 [node name="Health Icon" type="TextureRect" parent="."]
 layout_mode = 1

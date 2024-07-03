@@ -1,17 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwer6xnbmjqba"]
+[gd_scene load_steps=6 format=3 uid="uid://dwer6xnbmjqba"]
 
 [ext_resource type="PackedScene" uid="uid://bo6sp250qfnor" path="res://Remembering/Scenes/Player/Player.tscn" id="1_k123w"]
 [ext_resource type="PackedScene" uid="uid://hyi44sn8ovc1" path="res://Remembering/Scenes/Player/PlayerCamera.tscn" id="2_0k6bl"]
+[ext_resource type="Resource" uid="uid://yxxe6c1h38rs" path="res://Remembering/Scripts/Resources/Stick.tres" id="2_b7idb"]
 [ext_resource type="PackedScene" uid="uid://iw5vkfthjroc" path="res://Remembering/Rooms/Room00001.tscn" id="2_qs8om"]
 [ext_resource type="PackedScene" uid="uid://deljfjjovljl3" path="res://Remembering/Scenes/Player/Healthbar.tscn" id="4_k7aau"]
 
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_k123w")]
+currentWeapon = ExtResource("2_b7idb")
 
 [node name="Camera2D" parent="Player" instance=ExtResource("2_0k6bl")]
 
 [node name="Room00001" parent="." instance=ExtResource("2_qs8om")]
+z_index = -2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

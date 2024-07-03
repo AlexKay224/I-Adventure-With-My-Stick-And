@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bk6spys4ltufm" path="res://Remembering/Scenes/Level/Gate_Template.tscn" id="1_tyo8e"]
 [ext_resource type="Texture2D" uid="uid://duh6krrdnkemy" path="res://Remembering/Art/Misc/Test-Gate-Horizontal-Sheet.png" id="2_6a0hj"]
-[ext_resource type="Script" path="res://Remembering/Scripts/Gate.cs" id="2_vglc6"]
+[ext_resource type="Script" path="res://Remembering/Scripts/GameWorld/Gate.cs" id="2_vglc6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cp5u6"]
 size = Vector2(61.965, 27.906)

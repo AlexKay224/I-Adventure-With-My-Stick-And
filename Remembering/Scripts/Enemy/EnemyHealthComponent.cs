@@ -27,4 +27,8 @@ public partial class EnemyHealthComponent : Node2D
 			GetParent().QueueFree();
 		}
 	}
+
+	public float GetHealth() {
+		return health;
+	}
 }

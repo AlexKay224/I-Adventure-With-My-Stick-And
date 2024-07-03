@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 
 public partial class Player : CharacterBody2D
 {
@@ -14,6 +15,7 @@ public partial class Player : CharacterBody2D
 	}
 
 	Vector2 inputDirection;
+	Vector2 lastDirection;
 
 	//Exported Attributes
 	[ExportGroup("Attributes")]
@@ -26,7 +28,7 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public float DodgeCooldown { get; set; } = 5f;
 	[Export]
-	public float MeleeDamage { get; set; } = 10f;
+	public float MeleeDamage { get; set; } = 1f;
 	[Export]
 	public float MeleeRate { get; set; } = 1f;
 	[Export]
@@ -45,6 +47,10 @@ public partial class Player : CharacterBody2D
 	[ExportGroup("Instances")]
 	[Export]
 	public ProgressBar healthbar;
+	[Export]
+	public Weapon currentWeapon;
+	[Export]
+	public AnimationPlayer weaponAnims;
 
 
 	//Timers
@@ -92,6 +98,7 @@ public partial class Player : CharacterBody2D
 		MeleeTimer.WaitTime = MeleeRate; //Note that this will have to be adjusted to multiply with weapon cooldown
 
 		inputDirection = Vector2.Zero;
+		lastDirection = Vector2.Down;
 		animTree.Active = true;
 		isAlive = true;
 		isInvincible = false;
@@ -105,8 +112,8 @@ public partial class Player : CharacterBody2D
 
 	public void GetInput() {
 		inputDirection = Input.GetVector("Left", "Right", "Up", "Down");
+		if(inputDirection != Vector2.Zero) lastDirection = inputDirection;
 		CheckDodge(inputDirection);
-		CheckAttack();
 		if(dodgeState != DodgeState.DODGE) Velocity = inputDirection * Speed;
 	}
 
@@ -147,7 +154,6 @@ public partial class Player : CharacterBody2D
 
 	public bool CheckAttack() {
 		if(meleeState == MeleeState.NO_MELEE && Input.IsActionJustPressed("Weapon")) {
-			Debug.WriteLine("Going to Attack");
 			meleeState = MeleeState.MELEE;
 			MeleeTimer.Start();
 			return true;
@@ -160,17 +166,13 @@ public partial class Player : CharacterBody2D
 	public void OnEnemyOrAttackAttackedPlayer(Area2D hit) {
 		if(!isInvincible) {
 			if(hit is EnemyAttackComponent) {
-				Debug.WriteLine("Attacking Enemy");
 				EnemyAttackComponent attack = (EnemyAttackComponent) hit;
 					TakeDamage(attack.damage, attack.attackType);
 			} else if(hit is EnemyHitboxComponent) {
-				Debug.WriteLine("Enemy");
 					TakeContactDamage(Enemy.CONTACT_DAMAGE);
 				}
 			Knockback();
-		} else {
-			Debug.WriteLine("honh");
-		}
+		} 
 	}
 
 	public void UpdateAnimation() {
@@ -182,19 +184,24 @@ public partial class Player : CharacterBody2D
 			animTree.Set("parameters/conditions/idle", false);
 			animTree.Set("parameters/conditions/isMoving", true);
 		}
-		if(meleeState == MeleeState.NO_MELEE && Input.IsActionJustPressed("Weapon")) {
-			animTree.Set("parameters/conditions/isAttacking", true);
-			Debug.WriteLine("Going to Attack");
-			meleeState = MeleeState.MELEE;
-			MeleeTimer.Start();
-
+		if(CheckAttack()) {
+			AttackAnimation();
 		} else {
-			animTree.Set("parameters/conditions/isAttacking", false);
+			animTree.Set("parameters/conditions/Melee", false);
 		}
 		if(inputDirection != Vector2.Zero) {
 			animTree.Set("parameters/Move/blend_position", inputDirection);
 			animTree.Set("parameters/idle/blend_position", inputDirection);
-			animTree.Set("parameters/Melee/blend_position", inputDirection);
+			animTree.Set("parameters/Melee_Attack/blend_position", inputDirection);
+		}
+	}
+
+	public void AttackAnimation() {
+		animTree.Set("parameters/conditions/" + currentWeapon.playerState, true);
+		if(currentWeapon != null) {
+			GetNode<Sprite2D>("Weapon").Set("texture", currentWeapon.texture);
+			string wa = currentWeapon.weaponAnimation + "_" + GetWeaponDirection();
+			weaponAnims.Play(wa);
 		}
 	}
 
@@ -241,7 +248,6 @@ public partial class Player : CharacterBody2D
 	
     private void TakeContactDamage(float contactDamage)
     {
-		Debug.WriteLine("OW");
 		if(Shield <= 0f) {
 			health -= contactDamage;
 		}
@@ -281,6 +287,20 @@ public partial class Player : CharacterBody2D
 		isAlive = false;
 		Visible = false;
 		knockbackActive = true;
+	}
+
+
+
+
+	//helper method to get weapon animation string from current direction
+	public string GetWeaponDirection() {
+		if(Math.Abs(lastDirection.X) > Math.Abs(lastDirection.Y)) { //left/right
+			if(lastDirection.X > 0) return "right";
+			else return "left";
+		} else { //up/down
+			if(lastDirection.Y > 0) return "back";
+			else return "front";
+		}
 	}
 
 }
