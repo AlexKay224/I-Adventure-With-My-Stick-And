@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 
+[Icon("res://Remembering/Art/Misc/Justin's Icons/32x32/character.png")]
 public partial class Player : CharacterBody2D
 {
 

@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Runtime.ConstrainedExecution;
 
+[Icon("res://Remembering/Art/Misc/Justin's Icons/32x32/heart.png")]
 public partial class EnemyHealthComponent : Node2D
 {
 

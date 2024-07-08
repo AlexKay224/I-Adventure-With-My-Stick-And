@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
+[Icon("res://Remembering/Art/Misc/Justin's Icons/32x32/group.png")]
 public partial class EnemyHitboxComponent : Area2D
 {
 	[Export]

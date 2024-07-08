@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Icon("res://Remembering/Art/Misc/Justin's Icons/32x32/ui.png")]
 public partial class PlayerUI : Panel
 {
 

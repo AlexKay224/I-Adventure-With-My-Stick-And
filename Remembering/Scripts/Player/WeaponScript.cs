@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Icon("res://Remembering/Art/Misc/Justin's Icons/32x32/swords.png")]
 public partial class WeaponScript : Sprite2D
 {
 	// Called when the node enters the scene tree for the first time.
