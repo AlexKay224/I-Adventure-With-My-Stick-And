@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cgkr7enj6nhky"]
 
-[ext_resource type="PackedScene" uid="uid://dy2na6sl8y0nb" path="res://Remembering/Rooms/room_template.tscn" id="1_yqa8d"]
-[ext_resource type="PackedScene" uid="uid://dq0fbx5fekfnl" path="res://Remembering/Scenes/Enemies/FearCrow.tscn" id="2_awome"]
-[ext_resource type="PackedScene" uid="uid://bwoa2pf24e607" path="res://Remembering/Scenes/Level/HorizontalGate.tscn" id="2_pm7wu"]
-[ext_resource type="PackedScene" uid="uid://ob728saw48w1" path="res://Remembering/Scenes/Level/VerticalGate.tscn" id="3_jvdbr"]
+[ext_resource type="PackedScene" uid="uid://dy2na6sl8y0nb" path="res://Remembering/Rooms/room_template.tscn" id="1_kmenr"]
+[ext_resource type="PackedScene" uid="uid://dq0fbx5fekfnl" path="res://Remembering/Scenes/Enemies/FearCrow.tscn" id="2_nflq7"]
+[ext_resource type="PackedScene" uid="uid://bwoa2pf24e607" path="res://Remembering/Scenes/Level/HorizontalGate.tscn" id="3_vhs4i"]
+[ext_resource type="PackedScene" uid="uid://ob728saw48w1" path="res://Remembering/Scenes/Level/VerticalGate.tscn" id="4_mcfo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gljft"]
 size = Vector2(48.5, 20)
@@ -11,8 +11,8 @@ size = Vector2(48.5, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwsqb"]
 size = Vector2(48.5, 20)
 
-[node name="RoomTemplate" instance=ExtResource("1_yqa8d")]
-spawnedEnemies = Array[PackedScene]([ExtResource("2_awome"), ExtResource("2_awome"), ExtResource("2_awome")])
+[node name="RoomTemplate" instance=ExtResource("1_kmenr")]
+spawnedEnemies = Array[PackedScene]([ExtResource("2_nflq7"), ExtResource("2_nflq7"), ExtResource("2_nflq7")])
 
 [node name="EntranceS1" type="Node2D" parent="Entrance" index="0"]
 position = Vector2(16, 112)
@@ -26,28 +26,28 @@ position = Vector2(16, -160)
 [node name="EntranceN2" type="Node2D" parent="Entrance" index="3"]
 position = Vector2(48, -160)
 
-[node name="EntranceE1" type="Node2D" parent="Entrance" index="4"]
+[node name="EntranceW1" type="Node2D" parent="Entrance" index="4"]
 position = Vector2(-144, -112)
 
-[node name="EntranceE2" type="Node2D" parent="Entrance" index="5"]
+[node name="EntranceW2" type="Node2D" parent="Entrance" index="5"]
 position = Vector2(-144, -80)
 
-[node name="EntranceW1" type="Node2D" parent="Entrance" index="6"]
+[node name="EntranceE1" type="Node2D" parent="Entrance" index="6"]
 position = Vector2(208, -112)
 
-[node name="EntranceW2" type="Node2D" parent="Entrance" index="7"]
+[node name="EntranceE2" type="Node2D" parent="Entrance" index="7"]
 position = Vector2(208, -80)
 
-[node name="Gate" parent="Gates" index="0" instance=ExtResource("2_pm7wu")]
+[node name="Gate" parent="Gates" index="0" instance=ExtResource("3_vhs4i")]
 position = Vector2(32, -160)
 
-[node name="Gate2" parent="Gates" index="1" instance=ExtResource("2_pm7wu")]
+[node name="Gate2" parent="Gates" index="1" instance=ExtResource("3_vhs4i")]
 position = Vector2(32, 112)
 
-[node name="Gate3" parent="Gates" index="2" instance=ExtResource("3_jvdbr")]
+[node name="Gate3" parent="Gates" index="2" instance=ExtResource("4_mcfo6")]
 position = Vector2(-144, -101)
 
-[node name="Gate4" parent="Gates" index="3" instance=ExtResource("3_jvdbr")]
+[node name="Gate4" parent="Gates" index="3" instance=ExtResource("4_mcfo6")]
 position = Vector2(208, -101)
 
 [node name="Spawn1" type="Node2D" parent="EnemySpawns" index="0"]
@@ -67,12 +67,12 @@ shape = SubResource("RectangleShape2D_gljft")
 position = Vector2(32, -160)
 shape = SubResource("RectangleShape2D_gljft")
 
-[node name="DetectorE" type="CollisionShape2D" parent="PlayerDetector" index="2"]
+[node name="DetectorW" type="CollisionShape2D" parent="PlayerDetector" index="2"]
 position = Vector2(-144, -96)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_wwsqb")
 
-[node name="DetectorW" type="CollisionShape2D" parent="PlayerDetector" index="3"]
+[node name="DetectorE" type="CollisionShape2D" parent="PlayerDetector" index="3"]
 position = Vector2(208, -96)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_wwsqb")

@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpd4gyuk2yvbp"]
+
+[ext_resource type="PackedScene" uid="uid://dy2na6sl8y0nb" path="res://Remembering/Rooms/room_template.tscn" id="1_ajwut"]
+[ext_resource type="PackedScene" uid="uid://bwoa2pf24e607" path="res://Remembering/Scenes/Level/HorizontalGate.tscn" id="2_6t8s2"]
+[ext_resource type="PackedScene" uid="uid://dq0fbx5fekfnl" path="res://Remembering/Scenes/Enemies/FearCrow.tscn" id="2_whns5"]
+[ext_resource type="PackedScene" uid="uid://ob728saw48w1" path="res://Remembering/Scenes/Level/VerticalGate.tscn" id="3_6o4ux"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6osf"]
+size = Vector2(48.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x86mp"]
+size = Vector2(48.5, 20)
+
+[node name="RoomTemplate" instance=ExtResource("1_ajwut")]
+spawnedEnemies = Array[PackedScene]([ExtResource("2_whns5"), ExtResource("2_whns5"), ExtResource("2_whns5"), ExtResource("2_whns5")])
+
+[node name="EntranceS1" type="Node2D" parent="Entrance" index="0"]
+position = Vector2(-16, 176)
+
+[node name="EntranceS2" type="Node2D" parent="Entrance" index="1"]
+position = Vector2(16, 176)
+
+[node name="EntranceN1" type="Node2D" parent="Entrance" index="2"]
+position = Vector2(-16, -192)
+
+[node name="EntranceN2" type="Node2D" parent="Entrance" index="3"]
+position = Vector2(16, -192)
+
+[node name="EntranceW1" type="Node2D" parent="Entrance" index="4"]
+position = Vector2(-176, -16)
+
+[node name="EntranceW2" type="Node2D" parent="Entrance" index="5"]
+position = Vector2(-176, 16)
+
+[node name="EntranceE1" type="Node2D" parent="Entrance" index="6"]
+position = Vector2(176, -16)
+
+[node name="EntranceE2" type="Node2D" parent="Entrance" index="7"]
+position = Vector2(176, 16)
+
+[node name="Gate" parent="Gates" index="0" instance=ExtResource("2_6t8s2")]
+position = Vector2(0, -192)
+
+[node name="Gate2" parent="Gates" index="1" instance=ExtResource("2_6t8s2")]
+position = Vector2(0, 176)
+
+[node name="Gate3" parent="Gates" index="2" instance=ExtResource("3_6o4ux")]
+position = Vector2(-176, -5)
+
+[node name="Gate4" parent="Gates" index="3" instance=ExtResource("3_6o4ux")]
+position = Vector2(176, -5)
+
+[node name="Spawn1" type="Node2D" parent="EnemySpawns" index="0"]
+position = Vector2(-128, -128)
+
+[node name="Spawn2" type="Node2D" parent="EnemySpawns" index="1"]
+position = Vector2(-128, 64)
+
+[node name="Spawn3" type="Node2D" parent="EnemySpawns" index="2"]
+position = Vector2(64, 128)
+
+[node name="Spawn4" type="Node2D" parent="EnemySpawns" index="3"]
+position = Vector2(128, -96)
+
+[node name="DetectorS" type="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(0, 176)
+shape = SubResource("RectangleShape2D_q6osf")
+
+[node name="DetectorN" type="CollisionShape2D" parent="PlayerDetector" index="1"]
+position = Vector2(0, -192)
+shape = SubResource("RectangleShape2D_q6osf")
+
+[node name="DetectorW" type="CollisionShape2D" parent="PlayerDetector" index="2"]
+position = Vector2(-176, 0)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_x86mp")
+
+[node name="DetectorE" type="CollisionShape2D" parent="PlayerDetector" index="3"]
+position = Vector2(176, 0)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_x86mp")
+
+[node name="TileMap" parent="." index="4"]
+layer_0/tile_data = PackedInt32Array(-327686, 131072, 0, 327685, 0, 1, -393211, 393216, 0, 393210, 327680, 0, -262150, 262144, 0, -196614, 262144, 0, -131078, 262144, 0, -65542, 0, 4, -6, 65536, 0, 65530, 65536, 0, 131066, 65536, 4, 196602, 262144, 0, 262138, 262144, 0, 327674, 262144, 0, 393211, 65536, 1, 393212, 65536, 1, 393213, 65536, 1, 393214, 65536, 4, 393215, 65536, 0, 327680, 65536, 0, 327681, 131072, 4, 327682, 65536, 1, 327683, 65536, 1, 327684, 65536, 1, 262149, 458752, 0, 196613, 458752, 0, 131077, 458752, 0, 65541, 131072, 4, 5, 65536, 0, -65531, 65536, 0, -131067, 196608, 4, -196603, 458752, 0, -262139, 458752, 0, -327675, 458752, 0, -327685, 196608, 0, -327684, 196608, 0, -327683, 196608, 0, -327682, 0, 4, -327681, 65536, 0, -393216, 65536, 0, -393215, 196608, 4, -393214, 196608, 0, -393213, 196608, 0, -393212, 196608, 0, 196610, 0, 4, 131074, 393216, 1, 65538, 393216, 1, 2, 393216, 1, -65534, 393216, 1, -131070, 393216, 1, -196606, 393216, 1, -262142, 65536, 4, -327678, 65536, 0, -327679, 65536, 0, -327680, 65536, 0, -262145, 65536, 0, -262146, 65536, 0, -262147, 65536, 0, -262148, 65536, 0, -262149, 65536, 0, -196613, 65536, 0, -131077, 65536, 0, -65541, 65536, 0, -5, 65536, 0, 65531, 65536, 0, 131067, 65536, 0, 196603, 65536, 0, 262139, 65536, 0, 327675, 65536, 0, 327676, 65536, 0, 262140, 65536, 0, 196604, 65536, 0, 131068, 65536, 0, 65532, 65536, 0, -4, 65536, 0, -65540, 65536, 0, -131076, 65536, 0, -196612, 65536, 0, -196611, 131072, 4, -131075, 458752, 0, -65539, 458752, 0, -3, 458752, 0, 65533, 458752, 0, 131069, 458752, 0, 196605, 458752, 0, 262141, 196608, 4, 327677, 65536, 0, 327678, 65536, 0, 262142, 65536, 3, 196606, 196608, 3, 131070, 196608, 3, 65534, 196608, 3, -2, 196608, 3, -65538, 196608, 3, -131074, 196608, 3, -196610, 65536, 1, -196609, 65536, 1, -131073, 196608, 3, -65537, 196608, 3, -1, 196608, 3, 65535, 196608, 3, 131071, 196608, 3, 196607, 196608, 3, 262143, 65536, 3, 327679, 65536, 0, 262144, 65536, 0, 196608, 65536, 3, 131072, 196608, 3, 65536, 196608, 3, 0, 196608, 3, -65536, 196608, 3, -131072, 196608, 3, -196608, 196608, 3, -262144, 65536, 1, -262143, 65536, 1, -196607, 196608, 3, -131071, 196608, 3, -65535, 196608, 3, 1, 196608, 3, 65537, 196608, 3, 131073, 196608, 3, 196609, 65536, 3, 262145, 65536, 0, 262146, 65536, 0, 262147, 65536, 0, 196611, 65536, 0, 131075, 65536, 0, 65539, 65536, 0, 3, 65536, 0, -65533, 65536, 0, -131069, 65536, 0, -196605, 65536, 0, -262141, 65536, 0, -327677, 65536, 0, -327676, 65536, 0, -262140, 65536, 0, -196604, 65536, 0, -131068, 65536, 0, -65532, 65536, 0, 4, 65536, 0, 65540, 65536, 0, 131076, 65536, 0, 196612, 65536, 0, 262148, 65536, 0)
