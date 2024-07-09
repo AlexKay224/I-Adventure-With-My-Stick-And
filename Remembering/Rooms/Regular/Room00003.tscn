@@ -21,10 +21,10 @@ position = Vector2(-16, 176)
 position = Vector2(16, 176)
 
 [node name="EntranceN1" type="Node2D" parent="Entrance" index="2"]
-position = Vector2(-16, -192)
+position = Vector2(-16, -176)
 
 [node name="EntranceN2" type="Node2D" parent="Entrance" index="3"]
-position = Vector2(16, -192)
+position = Vector2(16, -176)
 
 [node name="EntranceW1" type="Node2D" parent="Entrance" index="4"]
 position = Vector2(-176, -16)
@@ -67,7 +67,7 @@ position = Vector2(0, 176)
 shape = SubResource("RectangleShape2D_q6osf")
 
 [node name="DetectorN" type="CollisionShape2D" parent="PlayerDetector" index="1"]
-position = Vector2(0, -192)
+position = Vector2(0, -176)
 shape = SubResource("RectangleShape2D_q6osf")
 
 [node name="DetectorW" type="CollisionShape2D" parent="PlayerDetector" index="2"]
