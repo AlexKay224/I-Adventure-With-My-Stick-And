@@ -19,7 +19,7 @@ tile_set = ExtResource("1_284o5")
 format = 2
 layer_0/name = "Ground"
 layer_0/z_index = -1
-layer_1/name = "Gates"
+layer_1/name = "Objects"
 layer_1/tile_data = PackedInt32Array()
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="OnPlayerDetected"]

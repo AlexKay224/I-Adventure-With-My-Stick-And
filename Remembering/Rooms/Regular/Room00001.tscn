@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://iw5vkfthjroc"]
+[gd_scene load_steps=7 format=3 uid="uid://iw5vkfthjroc"]
 
 [ext_resource type="PackedScene" uid="uid://dy2na6sl8y0nb" path="res://Remembering/Rooms/room_template.tscn" id="1_hofua"]
 [ext_resource type="PackedScene" uid="uid://bwoa2pf24e607" path="res://Remembering/Scenes/Level/HorizontalGate.tscn" id="2_capss"]
 [ext_resource type="PackedScene" uid="uid://dq0fbx5fekfnl" path="res://Remembering/Scenes/Enemies/FearCrow.tscn" id="2_wqf53"]
+[ext_resource type="PackedScene" uid="uid://der3g0rrepqci" path="res://Remembering/Scenes/Enemies/Tagger.tscn" id="3_3cqjv"]
 [ext_resource type="PackedScene" uid="uid://ob728saw48w1" path="res://Remembering/Scenes/Level/VerticalGate.tscn" id="3_vfr24"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtavk"]
 size = Vector2(48.5, 20)
 
 [node name="Room00001" instance=ExtResource("1_hofua")]
-spawnedEnemies = Array[PackedScene]([ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("2_wqf53")])
+spawnedEnemies = Array[PackedScene]([ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("2_wqf53"), ExtResource("3_3cqjv")])
 
 [node name="EntranceS2" type="Node2D" parent="Entrance" index="0"]
 position = Vector2(16, 240)

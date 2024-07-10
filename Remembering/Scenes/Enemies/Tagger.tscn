@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://der3g0rrepqci"]
+[gd_scene load_steps=21 format=3 uid="uid://der3g0rrepqci"]
 
 [ext_resource type="PackedScene" uid="uid://dqihf1m8j05fk" path="res://Remembering/Scenes/Enemies/Templates/enemy_template.tscn" id="1_idi80"]
 [ext_resource type="Texture2D" uid="uid://doe1uw1bi28li" path="res://Remembering/Art/Enemies/Tagger.png" id="2_7lk34"]
+[ext_resource type="Script" path="res://Remembering/Scripts/Enemy/Tagger.cs" id="2_dphrc"]
 
 [sub_resource type="Animation" id="Animation_cp4v8"]
 length = 0.001
@@ -204,6 +205,9 @@ graph_offset = Vector2(-82, 19)
 size = Vector2(46, 17)
 
 [node name="Enemy_Template" instance=ExtResource("1_idi80")]
+script = ExtResource("2_dphrc")
+ChaseSpeed = 50.0
+Speed = 20.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_7lk34")

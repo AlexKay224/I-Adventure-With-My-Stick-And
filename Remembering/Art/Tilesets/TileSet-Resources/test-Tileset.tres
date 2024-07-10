@@ -215,6 +215,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yox30"]
+resource_name = "Tutorial"
 texture = ExtResource("1_0w22h")
 texture_region_size = Vector2i(32, 32)
 2:0/0 = 0
