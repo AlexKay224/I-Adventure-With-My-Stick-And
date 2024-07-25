@@ -697,10 +697,11 @@ libraries = {
 }
 speed_scale = 2.0
 
-[node name="WeaponHitbox" type="Area2D" parent="Weapon" node_paths=PackedStringArray("playerRef")]
+[node name="WeaponHitbox" type="Area2D" parent="Weapon" node_paths=PackedStringArray("playerRef", "hitbox")]
 collision_mask = 2
 script = ExtResource("5_ji5f0")
 playerRef = NodePath("../..")
+hitbox = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/WeaponHitbox"]
 position = Vector2(0.353555, 0.707109)

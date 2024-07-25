@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://der3g0rrepqci"]
+[gd_scene load_steps=23 format=3 uid="uid://der3g0rrepqci"]
 
 [ext_resource type="PackedScene" uid="uid://dqihf1m8j05fk" path="res://Remembering/Scenes/Enemies/Templates/enemy_template.tscn" id="1_idi80"]
 [ext_resource type="Texture2D" uid="uid://doe1uw1bi28li" path="res://Remembering/Art/Enemies/Tagger.png" id="2_7lk34"]
 [ext_resource type="Script" path="res://Remembering/Scripts/Enemy/Tagger.cs" id="2_dphrc"]
+[ext_resource type="PackedScene" uid="uid://bonopjylo6q7u" path="res://Remembering/Scenes/Enemies/Components/enemy_attack_component.tscn" id="4_dss8i"]
 
 [sub_resource type="Animation" id="Animation_cp4v8"]
 length = 0.001
@@ -202,11 +203,15 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-82, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8al6h"]
-size = Vector2(46, 17)
+size = Vector2(42, 14)
 
-[node name="Enemy_Template" instance=ExtResource("1_idi80")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8ycy"]
+size = Vector2(42, 14)
+
+[node name="Enemy_Template" node_paths=PackedStringArray("chaseAttack") instance=ExtResource("1_idi80")]
 script = ExtResource("2_dphrc")
 ChaseSpeed = 50.0
+chaseAttack = NodePath("EnemyAttackComponent")
 Speed = 20.0
 
 [node name="Sprite" parent="." index="0"]
@@ -234,3 +239,12 @@ MAX_HEALTH = 20.0
 [node name="HitboxShape" parent="EnemyHitboxComponent" index="0"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_8al6h")
+
+[node name="EnemyAttackComponent" parent="." index="6" node_paths=PackedStringArray("hitbox") instance=ExtResource("4_dss8i")]
+damage = 10.0
+name = "Chase"
+hitbox = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackComponent" index="0"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_n8ycy")

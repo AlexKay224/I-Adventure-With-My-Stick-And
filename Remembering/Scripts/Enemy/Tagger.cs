@@ -1,5 +1,7 @@
 using Godot;
-using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 public partial class Tagger : Enemy
 {
@@ -8,12 +10,21 @@ public partial class Tagger : Enemy
 	public Node2D target;
 	[Export]
 	public float ChaseSpeed { get; set; } = 30f;
+	[Export]
+	public EnemyAttackComponent chaseAttack;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		base._Ready();
 		Velocity = new Vector2(1, 0).Rotated(new RandomNumberGenerator().Randf()) * Speed;
 		SetPhysicsProcess(false);
 		CallDeferred("WaitForPhysics");
+
+		attacks = new List<EnemyAttackComponent>
+        {
+            chaseAttack
+        };
 	}
 
 	public async void WaitForPhysics() {
@@ -26,6 +37,7 @@ public partial class Tagger : Enemy
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+		Debug.WriteLine("Is monitorable: " + attacks.Find(a => a.name == "Chase").Monitorable);
 	}
 
 	public override void _PhysicsProcess(double delta) {
@@ -52,16 +64,20 @@ public partial class Tagger : Enemy
 	}
 
 		public override void OnDetectPlayer(Area2D player) {
-		if(player.GetParent().HasNode("AttackableHitbox")) {
+		if(player.Name == "AttackableHitbox") {
 			target = (Node2D) player.GetParent();
 			playerEntered = true;
-		}
+			attacks.Find(a => a.name == "Chase").SetDeferred("monitorable", true);
+			hitbox.SetDeferred("monitorable", false);
+		} 
 	}
 
 	public override void OnLeavePlayer(Area2D player) {
-		if (player.GetParent().HasNode("AttackableHitbox")) {
+		if (player.Name == "AttackableHitbox") {
 			target = null;
 			playerEntered = false;
+			attacks.Find(a => a.name == "Chase").SetDeferred("monitorable", false);
+			hitbox.SetDeferred("monitorable", true);
 		}	
 	}
 }

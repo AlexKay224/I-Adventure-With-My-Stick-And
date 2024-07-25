@@ -7,6 +7,8 @@ public partial class WeaponHitbox : Area2D
 
 	[Export]
 	public Player playerRef;
+	[Export]
+	public CollisionShape2D hitbox;
 
 	protected float DamageMult;
 	protected float WeaponDamage;
@@ -17,6 +19,7 @@ public partial class WeaponHitbox : Area2D
 		DamageMult = playerRef.MeleeDamage;
 		WeaponDamage = playerRef.currentWeapon.damage;
 		totalDamage = WeaponDamage * DamageMult;
+		hitbox.Disabled = true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

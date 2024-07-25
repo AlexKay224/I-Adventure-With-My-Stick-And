@@ -103,6 +103,7 @@ public partial class Player : CharacterBody2D
 		animTree.Active = true;
 		isAlive = true;
 		isInvincible = false;
+		knockbackActive = false;
 
 		health = MaxHealth;
     }
@@ -166,13 +167,15 @@ public partial class Player : CharacterBody2D
 	//used for dealing damage to the player
 	public void OnEnemyOrAttackAttackedPlayer(Area2D hit) {
 		if(!isInvincible) {
-			if(hit is EnemyAttackComponent) {
+			if(hit.Name == "EnemyAttackComponent") {
+				Debug.WriteLine("AAAA");
 				EnemyAttackComponent attack = (EnemyAttackComponent) hit;
-					TakeDamage(attack.damage, attack.attackType);
+				TakeDamage(attack.damage, attack.attackType);
 			} else if(hit is EnemyHitboxComponent) {
-					TakeContactDamage(Enemy.CONTACT_DAMAGE);
-				}
-			Knockback();
+				Debug.WriteLine("Hello");	
+				TakeContactDamage(Enemy.CONTACT_DAMAGE);
+			} else Debug.WriteLine ("hit name: " + hit.Name);
+			Knockback(hit.GlobalPosition - GlobalPosition);
 		} 
 	}
 
@@ -231,7 +234,8 @@ public partial class Player : CharacterBody2D
 			Shield -= damageDealt;
 		}
 
-		if(health <= 0f) isAlive = false;
+		EmitSignal(SignalName.HealthChange);
+		if(health <= 0f) GameOver();
 	}
 
 	public void OnInvincibleTimeout() {
@@ -266,11 +270,11 @@ public partial class Player : CharacterBody2D
 		if(health <= 0f) GameOver();
     }
 
-	private void Knockback() {
+	private void Knockback(Vector2 dir) {
 		if(!knockbackActive) {
 			knockbackActive = true;
 			KnockbackTimer.Start();
-			Vector2 knockback = -Velocity;
+			Vector2 knockback = -dir;
 			Velocity = knockback.Normalized() * knockbackPower;
 			MoveAndSlide();
 		}

@@ -8,6 +8,9 @@ public partial class EnemyHitboxComponent : Area2D
 	[Export]
 	EnemyHealthComponent healthComponent;
 
+	[Export]
+	public CollisionShape2D hitbox;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

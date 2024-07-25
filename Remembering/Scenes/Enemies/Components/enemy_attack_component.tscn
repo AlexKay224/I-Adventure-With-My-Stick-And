@@ -3,4 +3,7 @@
 [ext_resource type="Script" path="res://Remembering/Scripts/Enemy/EnemyAttackComponent.cs" id="1_t1syx"]
 
 [node name="EnemyAttackComponent" type="Area2D"]
+collision_layer = 2
+collision_mask = 7
+monitorable = false
 script = ExtResource("1_t1syx")
