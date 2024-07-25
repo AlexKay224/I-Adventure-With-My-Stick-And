@@ -711,4 +711,3 @@ shape = SubResource("RectangleShape2D_76uu1")
 [connection signal="timeout" from="InvincibilityTimer" to="." method="OnTimeout"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="OnKnockbackTimeout"]
 [connection signal="timeout" from="MeleeTimer" to="." method="OnMeleeTimeout"]
-[connection signal="area_entered" from="Weapon/WeaponHitbox" to="Weapon/WeaponHitbox" method="OnEnemyHit"]

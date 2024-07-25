@@ -31,5 +31,14 @@ public partial class EnemyHitboxComponent : Area2D
 		}
 	}
 
+	public void OnWeaponAttack(Area2D weapon) {
+		if(weapon is WeaponHitbox) {
+			WeaponHitbox w = (WeaponHitbox) weapon;
+			Damage(w.GetTotalDamage());
+		}
+	}
+
+
+
 	
 }

@@ -22,18 +22,14 @@ public partial class WeaponHitbox : Area2D
 		hitbox.Disabled = true;
 	}
 
+	public float GetTotalDamage() {
+		return totalDamage;
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 
-	}
-
-	public void OnEnemyHit(Area2D enemy) {
-		if (enemy is EnemyHitboxComponent) {
-			Debug.WriteLine("Hello");
-			EnemyHitboxComponent e = (EnemyHitboxComponent) enemy;
-			e.Damage(totalDamage);
-		} else Debug.WriteLine("Miss: " + enemy.GetPath());
 	}
 
 }

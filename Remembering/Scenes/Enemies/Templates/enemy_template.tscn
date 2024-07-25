@@ -31,4 +31,5 @@ hitbox = NodePath("HitboxShape")
 [node name="HitboxShape" type="CollisionShape2D" parent="EnemyHitboxComponent"]
 
 [connection signal="area_entered" from="EnemyHitboxComponent" to="." method="OnDetectPlayer"]
+[connection signal="area_entered" from="EnemyHitboxComponent" to="EnemyHitboxComponent" method="OnWeaponAttack"]
 [connection signal="area_exited" from="EnemyHitboxComponent" to="." method="OnLeavePlayer"]
